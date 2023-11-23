@@ -24,21 +24,26 @@ const NativeSelect = styled.select`
 `;
 
 const IconWrapper = styled.div`
-  right: 4px;
+  bottom: 0;
+  height: var(--size);
+  margin: auto;
   position: absolute;
-  top: 20%;
+  right: 8px;
+  top: 0;
+  width: var(--size);
 `;
 
 export function Select({ label, value, onChange, children }) {
   const displayedValue = getDisplayedValue(value, children);
+  const iconSize = 20;
 
   return (
     <SelectWrapper>
-      <NativeSelect value={displayedValue} onChange={onChange}>
+      <NativeSelect value={value} onChange={onChange}>
         {children}
       </NativeSelect>
-      <IconWrapper>
-        <Icon id="chevron-down" size={20}></Icon>
+      <IconWrapper style={{ '--size': iconSize + 'px' }}>
+        <Icon id="chevron-down" size={iconSize}></Icon>
       </IconWrapper>
     </SelectWrapper>
   );
