@@ -20,20 +20,29 @@ const STYLES = {
 };
 
 const InputWrapper = styled.div`
+  color: ${COLORS.gray700};
   position: relative;
+
+  &:hover {
+    color: ${COLORS.black};
+  }
 `;
 
 const Input = styled.input`
   border: 0;
   border-bottom: 1px solid ${COLORS.gray700};
+  color: inherit;
   font-size: var(--font-size);
+  font-weight: 700;
   height: var(--height);
+  outline-offset: 2px;
   padding: 4px;
   padding-left: var(--padding-left);
   width: var(--width);
 
   &::placeholder {
     color: ${COLORS.gray300};
+    font-weight: 400;
   }
 `;
 
@@ -42,12 +51,21 @@ const IconWrapper = styled.div`
   height: var(--size);
   margin: auto;
   position: absolute;
-  /* left: 6px; */
   top: 0;
   width: var(--size);
+
+  &:hover {
+    color: ${COLORS.black};
+  }
 `;
 
-export function IconInput({ icon, label, placeholder, size, width = 250 }) {
+export function IconInput({
+  icon,
+  label,
+  placeholder = '',
+  size,
+  width = 250
+}) {
   const style = STYLES[size];
 
   if (!style) {
@@ -63,7 +81,7 @@ export function IconInput({ icon, label, placeholder, size, width = 250 }) {
     <InputWrapper>
       <VisuallyHidden>{label}</VisuallyHidden>
       <IconWrapper style={{ '--size': iconSize + 'px' }}>
-        <Icon id="search" size={iconSize}></Icon>
+        <Icon id={icon} size={iconSize}></Icon>
       </IconWrapper>
       <Input
         placeholder={placeholder}
