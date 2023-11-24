@@ -9,15 +9,13 @@ import VisuallyHidden from '../VisuallyHidden';
 const STYLES = {
   small: {
     fontSize: 0.7,
-    height: 25,
-    padding: 0,
-    radius: 4
+    iconSize: 16 * 0.8,
+    paddingLeft: 16
   },
   large: {
     fontSize: 0.8,
-    height: 40,
-    padding: 4,
-    radius: 8
+    iconSize: 16 * 1,
+    paddingLeft: 20
   }
 };
 
@@ -26,10 +24,17 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
+  border: 0;
+  border-bottom: 1px solid ${COLORS.gray700};
   font-size: var(--font-size);
   height: var(--height);
-  padding: 12px 32px;
+  padding: 4px;
+  padding-left: var(--padding-left);
   width: var(--width);
+
+  &::placeholder {
+    color: ${COLORS.gray300};
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -37,7 +42,7 @@ const IconWrapper = styled.div`
   height: var(--size);
   margin: auto;
   position: absolute;
-  right: 8px;
+  /* left: 6px; */
   top: 0;
   width: var(--size);
 `;
@@ -52,22 +57,19 @@ export function IconInput({ icon, label, placeholder, size, width = 250 }) {
     throw new Error(`Invalid width: ${width}\nwidth must be greater than 0.`);
   }
 
-  const { fontSize, height, padding } = style;
+  const { fontSize, iconSize, paddingLeft } = style;
 
   return (
-    <InputWrapper
-      style={{
-        '--height': height + 'px'
-      }}
-    >
+    <InputWrapper>
       <VisuallyHidden>{label}</VisuallyHidden>
-      <IconWrapper style={{ '--size': height + 'px' }}>
-        <Icon id="search" size={height}></Icon>
+      <IconWrapper style={{ '--size': iconSize + 'px' }}>
+        <Icon id="search" size={iconSize}></Icon>
       </IconWrapper>
       <Input
         placeholder={placeholder}
         style={{
           '--font-size': fontSize + 'rem',
+          '--padding-left': paddingLeft + 'px',
           '--width': width + 'px'
         }}
         type="text"
